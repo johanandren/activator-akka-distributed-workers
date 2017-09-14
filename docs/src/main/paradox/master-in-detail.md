@@ -27,7 +27,7 @@ The first thing you might notice is the comment saying _idempotent_, this means 
 To make the logic idempotent we simple check if the work id is already known, and if it is we simply `Ack` it without further logic. If the work is previously unknown, we start by transforming it into a `WorkAccepted` event, which we persist, and only in the `handler`-function passed to `persist` do we actually update the `workState`, send an `Ack` back to the `FrontEnd` and trigger a search for available workers.
 
 
-## Implementation items required for Akka Persistence
+## Using Akka Persistence
 
 In a "normal" Actor the only thing we have to do is to implement `receive`, which is then invoked for each incoming message. In a `PersistentActor` there are three things that needs to be implemented:
 
